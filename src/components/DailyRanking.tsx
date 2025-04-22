@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { fetchDailyRanking } from "@/lib/fetchDailyRanking";
 import { format } from "date-fns";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 type RankingEntry = {
   userName: string;
