@@ -19,10 +19,10 @@ export default function LoginPage() {
     }
   };
 
-  return (
-    <main className="min-h-screen bg-white flex items-center justify-center p-8">
-      <div className="w-full max-w-sm space-y-4">
-        <h1 className="text-2xl font-bold text-center text-gray-800">ログイン</h1>
+return (
+  <main className="min-h-screen bg-white flex items-center justify-center p-8">
+    <div className="w-full max-w-sm space-y-4">
+      <h1 className="text-2xl font-bold text-center text-gray-800">ログイン</h1>
         <input
           type="email"
           placeholder="メールアドレス"
@@ -43,6 +43,15 @@ export default function LoginPage() {
         >
           ログイン
         </button>
+            <div className="mt-4 text-center">
+        <p className="text-gray-600">
+          アカウントをお持ちでない方は
+          <Link href="/register" className="text-blue-600 hover:underline">
+            こちら
+          </Link>
+          から登録
+        </p>
+       </div>
       </div>
     </main>
   );
