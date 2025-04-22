@@ -14,14 +14,14 @@ type Entry = {
 export default function HistoryList() {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchHistory = async () => {
       const user = auth.currentUser;
-      console.log("📡 currentUser:", user);
 
       if (!user) {
-        console.warn("❗ 未ログイン状態です（履歴は取得されません）");
+        setError("ログインが必要です");
         setLoading(false);
         return;
       }
@@ -33,7 +33,6 @@ export default function HistoryList() {
           orderBy("createdAt", "desc")
         );
         const snap = await getDocs(q);
-        console.log("📄 履歴ドキュメント件数:", snap.docs.length);
 
         const history: Entry[] = [];
         snap.forEach((doc) => {
@@ -51,6 +50,7 @@ export default function HistoryList() {
         setEntries(history);
       } catch (error) {
         console.error("🚨 Firestore 取得エラー:", error);
+        setError("データの取得に失敗しました。もう一度お試しください。");
       } finally {
         setLoading(false);
       }
@@ -62,10 +62,26 @@ export default function HistoryList() {
   return (
     <div className="bg-white/80 p-6 rounded-xl shadow-md">
       <h2 className="text-2xl font-bold text-center mb-4">📘 履歴</h2>
+      
       {loading ? (
-        <p className="text-center">読み込み中...</p>
+        <div className="py-8 text-center">
+          <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-2"></div>
+          <p>読み込み中...</p>
+        </div>
+      ) : error ? (
+        <div className="py-4 text-center text-red-500">
+          <p>{error}</p>
+          <Link href="/login">
+            <Button className="mt-2">ログインする</Button>
+          </Link>
+        </div>
       ) : entries.length === 0 ? (
-        <p className="text-center text-gray-600">まだ記録がありません。</p>
+        <div className="py-8 text-center text-gray-600">
+          <p className="mb-4">まだ記録がありません。</p>
+          <Link href="/quiz">
+            <Button>チャレンジしてみる</Button>
+          </Link>
+        </div>
       ) : (
         <ul className="space-y-2">
           {entries.map((entry, i) => (
