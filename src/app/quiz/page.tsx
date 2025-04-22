@@ -180,20 +180,40 @@ export default function QuizPage() {
                   採点する
                 </Button>
 
-                {results && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mt-6 bg-white/70 p-6 rounded-xl shadow-inner"
-                  >
-                    <h2 className="text-3xl font-extrabold text-gray-800 mb-2">結果発表</h2>
-                    <p className="text-xl font-semibold mb-1">
-                      正解数：{score} / 10（{score * 10}点）
-                    </p>
-                    <p className="text-gray-600">所要時間：{formatTime(elapsed)}</p>
-                  </motion.div>
-                )}
+{results && (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5 }}
+    className="text-center mt-6 bg-white/70 p-6 rounded-xl shadow-inner"
+  >
+    <h2 className="text-3xl font-extrabold text-gray-800 mb-2">結果発表</h2>
+    <p className="text-xl font-semibold mb-1">
+      正解数：{score} / 10（{score * 10}点）
+    </p>
+    <p className="text-gray-600 mb-4">所要時間：{formatTime(elapsed)}</p>
+    
+    <div className="flex flex-col sm:flex-row gap-3 mt-4 justify-center">
+      <Button 
+        onClick={handleStart} 
+        variant="outline"
+        className="sm:w-auto w-full"
+      >
+        もう一度挑戦
+      </Button>
+      <Link href="/ranking">
+        <Button className="sm:w-auto w-full">
+          ランキングを見る
+        </Button>
+      </Link>
+      <Link href="/">
+        <Button variant="ghost" className="sm:w-auto w-full">
+          ホームに戻る
+        </Button>
+      </Link>
+    </div>
+  </motion.div>
+)}
               </>
             )}
           </CardContent>
