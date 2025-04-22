@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 import Confetti from "react-confetti";
 import { getTodayQuiz, Question } from "@/lib/getTodayQuiz";
+import Link from "next/link";
 
 export default function QuizPage() {
   const [started, setStarted] = useState(false);
