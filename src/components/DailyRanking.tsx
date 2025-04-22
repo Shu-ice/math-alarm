@@ -29,12 +29,22 @@ export default function DailyRanking() {
       <h2 className="text-2xl font-bold text-center mb-4">
         🏆 {format(new Date(), "yyyy.MM.dd")} のランキング
       </h2>
-      {loading ? (
-        <p className="text-center">読み込み中...</p>
-      ) : ranking.length === 0 ? (
-        <p className="text-center text-gray-600">まだ誰も挑戦していません！</p>
-      ) : (
-        <ul className="space-y-2">
+{loading ? (
+  <div className="py-8 text-center">
+    <div className="animate-spin h-8 w-8 border-4 border-green-500 border-t-transparent rounded-full mx-auto mb-2"></div>
+    <p>読み込み中...</p>
+  </div>
+) : ranking.length === 0 ? (
+  <div className="py-8 text-center text-gray-600">
+    <p className="mb-4">まだ誰も挑戦していません！</p>
+    <Link href="/quiz">
+      <Button className="bg-green-500 hover:bg-green-600 text-white">
+        最初の挑戦者になる
+      </Button>
+    </Link>
+  </div>
+) : (
+  <ul className="space-y-2">
           {ranking.map((entry, i) => (
             <li
               key={i}
