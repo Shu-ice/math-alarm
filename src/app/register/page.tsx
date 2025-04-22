@@ -22,9 +22,9 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-6 bg-white">
-      <div className="w-full max-w-sm space-y-4">
-        <h1 className="text-2xl font-bold text-center">ユーザー登録</h1>
+  <main className="min-h-screen flex items-center justify-center p-6 bg-white">
+    <div className="w-full max-w-sm space-y-4">
+      <h1 className="text-2xl font-bold text-center">ユーザー登録</h1>
         <input
           type="text"
           placeholder="表示名"
@@ -52,7 +52,16 @@ export default function RegisterPage() {
         >
           登録する
         </button>
+      <div className="mt-4 text-center">
+        <p className="text-gray-600">
+          すでにアカウントをお持ちの方は
+          <Link href="/login" className="text-blue-600 hover:underline">
+            こちら
+          </Link>
+          からログイン
+        </p>
       </div>
-    </main>
-  );
+    </div>
+  </main>
+);
 }
