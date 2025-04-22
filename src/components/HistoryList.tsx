@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
 import { format } from "date-fns";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 type Entry = {
   date: string;
