@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 日次クイズを認証ユーザーにのみ公開
+    match /dailyQuizzes/{quizDate} {
+      allow read: if request.auth != null;
+    }
+    // ユーザードキュメントは本人のみ操作可能
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    // クイズ結果の書き込みを認証ユーザーに許可
+    match /quizResults/{resultId} {
+      allow create: if request.auth != null;
+    }
+  }
+} 
